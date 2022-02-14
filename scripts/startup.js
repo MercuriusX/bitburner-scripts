@@ -10,7 +10,7 @@ export async function main(ns) {
 	let initialPrivateServerRam = 1024;
 	let currentTargets = ["hong-fang-tea", "nectar-net", "neo-net", "zer0", "harakiri-sushi", "netlink", "aevum-police", "summit-uni", "millenium-fitness", "catalyst", "omega-net", "rothman-uni", "rho-construction", "silver-helix", "max-hardware", "phantasy", "the-hub", "alpha-ent", "infocomm", "unitalife", "snap-fitness", "comptek", "syscore", "johnson-ortho", "zb-institute"];
 
-	if (ns.getHackingLevel() > 3000) {
+	if (ns.getHackingLevel() > 3000) { // alternate target list to be used when hacking level is high enough
 		currentTargets = ["nova-med", "aerocorp", "stormtech", "unitalife", "zb-def", "icarus", "defcomm", "omnia", "powerhouse-fitness", "zb-institute", "titan-labs", "applied-energetics", "galactic-cyber", "infocomm", "solaris", "taiyang-digital", "vitalife", "lexo-corp", "helios", "alpha-ent", "rho-construction", "microdyne", "snap-fitness", "syscore", "catalyst"]
 	}
 	
@@ -49,13 +49,13 @@ export async function main(ns) {
 		}
 	}
 	
-	if (!(ns.isRunning("batchHack.js", "home", "joesguns", "home"))) {
+	if (!(ns.isRunning("batchHack.js", "home", "joesguns", "home"))) { // ensures batch hack is always happening on joesguns
 		ns.run("distributeScript.js", 1, "joesguns", "home");
 	}
-	while (ns.getServerMoneyAvailable("home") < (initialPrivateServerRam * 55000 * 26) && ns.getPurchasedServers().length != 25) {
+	while (ns.getServerMoneyAvailable("home") < (initialPrivateServerRam * 55000 * 26) && ns.getPurchasedServers().length != 25) { // prevents script from continuing if all private servers aren't purchased
 		await ns.sleep(500);
 	}
-	for (let i = 0; i < ns.getPurchasedServerLimit(); i++) {
+	for (let i = 0; i < ns.getPurchasedServerLimit(); i++) { 
 		let pservHostname = "pserv-" + i;
 		if (homeScan.indexOf(pservHostname) == -1) {
 			ns.purchaseServer(pservHostname, initialPrivateServerRam);
@@ -65,13 +65,10 @@ export async function main(ns) {
 		}
 	}
 	for (let i = 0; i < privateServerList.length; i++) {
-		if (i == currentTargets.length) {
+		if (i == currentTargets.length) { // safeguard against erroring if the target list is smaller than the number of private servers
 			break;
 		}
 		ns.killall(privateServerList[i]);
 		ns.run("distributeScript.js", 1, currentTargets[i], privateServerList[i]);
-		while (ns.isRunning("distributeScript.js", privateServerList[i], currentTargets[i], privateServerList[i])) {
-			await ns.sleep(500);
-		}
 	}
 }

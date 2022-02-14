@@ -12,12 +12,14 @@ export async function main(ns) {
 	let growThreadsToDouble = Math.ceil(ns.growthAnalyze(target, 2));
 	let securityIncreaseFromGrow = ns.growthAnalyzeSecurity(growThreadsToDouble);
 	let threadsToCounterGrow = Math.ceil(((securityIncreaseFromGrow) / 0.05) + 5); // +5 threads for security 
+	let totalThreadCount = hackThreadsToHalve + growThreadsToDouble + threadsToCounterHack + threadsToCounterGrow;
 	const weakenRam = ns.getScriptRam("weaken.js");
 	const hackRam = ns.getScriptRam("hack.js");
 	const growRam = ns.getScriptRam("grow.js");
-
+	// all operations assume minimum security and maximum money; run primeServer.js before starting
 	if (attackingServerRam > (weakenRam * (threadsToCounterHack + threadsToCounterGrow)) + (hackRam * hackThreadsToHalve) + (growRam * growThreadsToDouble)) {
 		while (true) {
+			ns.exec("weakenLoop.js", attackingServer, 1, totalThreadCount); // starts a weaken loop for hacking exp with the free ram
 			ns.exec("weaken.js", attackingServer, threadsToCounterHack, target, Math.random());
 			await ns.sleep(400);
 			ns.exec("weaken.js", attackingServer, threadsToCounterGrow, target, Math.random());
