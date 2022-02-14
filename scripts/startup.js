@@ -7,12 +7,12 @@ export async function main(ns) {
 	*/
 	let homeScan = ns.scan("home");
 	let privateServerList = [];
-	let currentTargets = ["hong-fang-tea", "nectar-net", "neo-net", "zer0", "harakiri-sushi", "netlink", "aevum-police", "summit-uni", "millenium-fitness", "catalyst", "omega-net", "rothman-uni", "rho-construction", "silver-helix", "max-hardware", "phantasy", "the-hub", "alpha-ent", "infocomm", "unitalife", "snap-fitness", "comptek", "syscore", "johnson-ortho"];
+	let currentTargets = ["hong-fang-tea", "nectar-net", "neo-net", "zer0", "harakiri-sushi", "netlink", "aevum-police", "summit-uni", "millenium-fitness", "catalyst", "omega-net", "rothman-uni", "rho-construction", "silver-helix", "max-hardware", "phantasy", "the-hub", "alpha-ent", "infocomm", "unitalife", "snap-fitness", "comptek", "syscore", "johnson-ortho", "zb-institute"];
 	let privateServerRam = 2048;
 
 	if (ns.getHackingLevel() < 1000) {
 		if (ns.hasRootAccess("foodnstuff") == false) { ns.nuke("foodnstuff"); }
-		ns.run("weaken.js", Math.floor(ns.getServerMaxRam("home") / ns.getScriptRam("weaken.js") - 30), "foodnstuff");
+		ns.run("hack.js", Math.floor(ns.getServerMaxRam("home") / ns.getScriptRam("hack.js") - 30), "foodnstuff");
 		await ns.sleep(ns.getHackTime("foodnstuff") + 1000);
 	}
 
