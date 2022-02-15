@@ -6,7 +6,7 @@ export async function main(ns) {
 	let timeToWeaken = ns.getWeakenTime(target);
 	let timeToHack = ns.getHackTime(target);
 	let timeToGrow = ns.getGrowTime(target);
-	let hackThreadsToHalve = Math.floor(ns.hackAnalyzeThreads(target, ns.getServerMaxMoney(target) / 2));
+	let hackThreadsToHalve = Math.floor(ns.hackAnalyzeThreads(target, (ns.getServerMaxMoney(target) / 2)));
 	let securityIncreaseFromHack = ns.hackAnalyzeSecurity(hackThreadsToHalve);
 	let threadsToCounterHack = Math.ceil(((securityIncreaseFromHack) / 0.05) + 5); // +5 threads for security
 	let growThreadsToDouble = Math.ceil(ns.growthAnalyze(target, 2));
