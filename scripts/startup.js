@@ -55,7 +55,7 @@ export async function main(ns) {
 	while (ns.getServerMoneyAvailable("home") < (initialPrivateServerRam * 55000 * 26) && ns.getPurchasedServers().length != 25) { // prevents script from continuing if all private servers aren't purchased
 		await ns.sleep(500);
 	}
-	for (let i = 0; i < ns.getPurchasedServerLimit(); i++) { 
+	for (let i = 0; i < ns.getPurchasedServerLimit(); i++) {
 		let pservHostname = "pserv-" + i;
 		if (homeScan.indexOf(pservHostname) == -1) {
 			ns.purchaseServer(pservHostname, initialPrivateServerRam);
