@@ -1,11 +1,11 @@
 /** @param {NS} ns **/
 export async function main(ns) {
-	let multiplier = ns.args[0]; if (ns.args[0] == null) { multiplier = 1; }
+	let multiplier = 1; if (ns.args[0] != null) { multiplier = ns.args[0]; }
 	let ram = ns.getServerMaxRam("pserv-0");
 	let newRam = ram * 2 * multiplier;
-	let upgradeAvailable = ns.getServerMoneyAvailable("home") > newRam * 55000 * 25;
 	let totalUpgradeCost = newRam * 55000 * 25;
-
+	let upgradeAvailable = ns.getServerMoneyAvailable("home") > totalUpgradeCost;
+	
 	if (newRam <= 1048576) { // safeguards against trying to buy servers past max ram
 		if (upgradeAvailable) {
 			ns.tprint("Upgrading to: " + newRam + "GB");

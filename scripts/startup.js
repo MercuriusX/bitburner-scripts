@@ -8,11 +8,11 @@ export async function main(ns) {
 	let homeScan = ns.scan("home");
 	let privateServerList = [];
 	let initialPrivateServerRam = 2048;
-	let currentTargets = ["catalyst", "aevum-police", "netlink", "millenium-fitness", "comptek", "summit-uni", "rothman-uni", "the-hub", "johnson-ortho", "omega-net", "silver-helix", "crush-fitness", "phantasy", "iron-gym", "max-hardware", "zer0", "neo-net", "harakiri-sushi", "hong-fang-tea", "nectar-net", "joesguns", "sigma-cosmetics", "foodnstuff", "fulcrumassets", "n00dles"];
+	let currentTargets = ["rho-construction", "microdyne", "snap-fitness", "syscore", "catalyst", "aevum-police", "netlink", "millenium-fitness", "comptek", "summit-uni", "rothman-uni", "the-hub", "johnson-ortho", "omega-net", "silver-helix", "crush-fitness", "phantasy", "iron-gym", "max-hardware", "zer0", "neo-net", "harakiri-sushi", "hong-fang-tea", "nectar-net", "sigma-cosmetics"];
 	let baseTarget = "n00dles"; 
 
 	if (ns.getHackingLevel() > 1000) {
-		currentTargets = ["hong-fang-tea", "nectar-net", "neo-net", "zer0", "harakiri-sushi", "netlink", "aevum-police", "summit-uni", "millenium-fitness", "catalyst", "omega-net", "rothman-uni", "rho-construction", "silver-helix", "max-hardware", "phantasy", "the-hub", "alpha-ent", "infocomm", "unitalife", "snap-fitness", "comptek", "syscore", "johnson-ortho", "zb-institute"];
+		currentTargets = ["galactic-cyber", "infocomm", "solaris", "taiyang-digital", "vitalife", "lexo-corp", "helios", "alpha-ent", "rho-construction", "microdyne", "snap-fitness", "syscore", "catalyst", "aevum-police", "netlink", "millenium-fitness", "comptek", "summit-uni", "rothman-uni", "the-hub", "johnson-ortho", "omega-net", "silver-helix", "crush-fitness", "phantasy"];
 		if (ns.getHackingLevel() > 3000) { // alternate target lists to be used when hacking level is high enough
 			currentTargets = ["nova-med", "aerocorp", "stormtech", "unitalife", "zb-def", "icarus", "defcomm", "omnia", "powerhouse-fitness", "zb-institute", "titan-labs", "applied-energetics", "galactic-cyber", "infocomm", "solaris", "taiyang-digital", "kuai-gong", "lexo-corp", "helios", "alpha-ent", "rho-construction", "microdyne", "snap-fitness", "syscore", "catalyst"]; // vitalife
 			if (ns.getHackingLevel() > 5000) {
@@ -32,30 +32,18 @@ export async function main(ns) {
 	}
 
 	for (let i = 0; i < allServers.length; i++) {
-		if (!ns.hasRootAccess(allServers[i]) && ns.getHackingLevel() > ns.getServerRequiredHackingLevel(allServers[i])) {
-			let numPortsCracked = 0;
-			if (ns.fileExists("BruteSSH.exe", "home")) {
-				ns.brutessh(allServers[i]);
-				numPortsCracked++;
-			}
-			if (ns.fileExists("FTPcrack.exe", "home")) {
-				ns.ftpcrack(allServers[i]);
-				numPortsCracked++;
-			}
-			if (ns.fileExists("relaySMTP.exe", "home")) {
-				ns.relaysmtp(allServers[i]);
-				numPortsCracked++;
-			}
-			if (ns.fileExists("HTTPWorm.exe", "home")) {
-				ns.httpworm(allServers[i]);
-				numPortsCracked++;
-			}
-			if (ns.fileExists("SQLInject.exe", "home")) {
-				ns.sqlinject(allServers[i]);
-				numPortsCracked++;
-			}
-			if (numPortsCracked >= ns.getServerNumPortsRequired(allServers[i])) {
-				ns.nuke(allServers[i]);
+		if (ns.fileExists("BruteSSH.exe")) { ns.brutessh(allServers[i]); }
+		if (ns.fileExists("FTPcrack.exe")) { ns.ftpcrack(allServers[i]); }
+		if (ns.fileExists("relaySMTP.exe")) { ns.relaysmtp(allServers[i]); }
+		if (ns.fileExists("HTTPWorm.exe")) { ns.httpworm(allServers[i]); }
+		if (ns.fileExists("SQLInject.exe")) { ns.sqlinject(allServers[i]); }
+		try {
+			ns.nuke(allServers[i]);
+		} catch (e) {
+			let index = currentTargets.indexOf(allServers[i]);
+			if (index > -1) {
+				currentTargets.splice(index, 1);
+				ns.tprint("Removing server from current target list: " + allServers[i]);
 			}
 		}
 	}
@@ -66,12 +54,11 @@ export async function main(ns) {
 		ns.kill("weakenLoop.js", "home", -1988, "joesguns");
 		ns.run("weakenLoop.js", 1, -1988, baseTarget); 
 	} else {
-		ns.kill("weakenLoop.js", "home", -1988, baseTarget);
+		ns.kill("weakenLoop.js", "home", -1988, "n00dles");
+		ns.kill("weakenLoop.js", "home", -1988, "joesguns");
 		if (!(ns.isRunning("batchHack.js", "home", baseTarget, "home"))) { // ensures batch hack is always happening on joesguns
 			ns.run("distributeScript.js", 1, baseTarget, "home");
-			if (ns.getHackingLevel() < 450) {
-				ns.run("earlyGameDistributor.js", 1, baseTarget, true);
-			}
+			ns.run("earlyGameDistributor.js", 1, baseTarget, true);
 		}
 		while (ns.getServerMoneyAvailable("home") < (initialPrivateServerRam * 55000 * 26) && ns.getPurchasedServers().length != 25) { // prevents script from continuing if all private servers aren't purchased
 			await ns.sleep(500);
