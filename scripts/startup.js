@@ -9,7 +9,7 @@ export async function main(ns) {
 	let privateServerList = [];
 	let initialPrivateServerRam = 2048;
 	let currentTargets = ["catalyst", "aevum-police", "netlink", "millenium-fitness", "comptek", "summit-uni", "rothman-uni", "the-hub", "johnson-ortho", "omega-net", "silver-helix", "crush-fitness", "phantasy", "iron-gym", "max-hardware", "zer0", "neo-net", "harakiri-sushi", "hong-fang-tea", "nectar-net", "joesguns", "sigma-cosmetics", "foodnstuff", "fulcrumassets", "n00dles"];
-	let baseTarget = "n00dles"; if (ns.getHackingLevel() > 150) { baseTarget = "joesguns"; }
+	let baseTarget = "n00dles"; 
 
 	if (ns.getHackingLevel() > 1000) {
 		currentTargets = ["hong-fang-tea", "nectar-net", "neo-net", "zer0", "harakiri-sushi", "netlink", "aevum-police", "summit-uni", "millenium-fitness", "catalyst", "omega-net", "rothman-uni", "rho-construction", "silver-helix", "max-hardware", "phantasy", "the-hub", "alpha-ent", "infocomm", "unitalife", "snap-fitness", "comptek", "syscore", "johnson-ortho", "zb-institute"];
@@ -25,6 +25,10 @@ export async function main(ns) {
 		if (!ns.hasRootAccess("foodnstuff")) { ns.nuke("foodnstuff"); }
 		ns.run("hack.js", Math.floor(ns.getServerMaxRam("home") / ns.getScriptRam("hack.js") - 6), "foodnstuff");
 		await ns.sleep(ns.getHackTime("foodnstuff") + 1000);
+	}
+
+	if (ns.getHackingLevel() > 150) {
+		baseTarget = "joesguns";
 	}
 
 	for (let i = 0; i < allServers.length; i++) {
