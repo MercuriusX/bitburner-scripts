@@ -2,7 +2,7 @@
 export async function main(ns) {
 	let multiplier = 1; if (ns.args[0] != null) { multiplier = ns.args[0]; }
 	let ram = ns.getServerMaxRam("pserv-0");
-	let newRam = ram * 2 * multiplier;
+	let newRam = ram * Math.pow(2, multiplier);
 	let totalUpgradeCost = newRam * 55000 * 25;
 	let upgradeAvailable = ns.getServerMoneyAvailable("home") > totalUpgradeCost;
 	
