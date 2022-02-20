@@ -12,7 +12,7 @@ export async function main(ns) {
 	}
 
 	for (let i = 0; i < hackableServers.length; i++) {
-		ns.tprint("Updating early game script for: " + hackableServers[i] + "(weaken looping: " + swapFunctions + ")");	
+		ns.tprint("Updating early game script for: " + hackableServers[i] + " (weaken looping: " + swapFunctions + ")");	
 		await ns.scp("earlyGameScript.js", hackableServers[i]);
 		await ns.scp("weaken.js", hackableServers[i]);
 		await ns.scp("grow.js", hackableServers[i]);

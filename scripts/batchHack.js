@@ -30,7 +30,7 @@ export async function main(ns) {
 			await ns.sleep(timeToHack + 200);
 		}
 	} else {
-		ns.tprint("Not enough ram on the attacking server: " + attackingServer + ", target: " + target + "\nExecuting weaken loop");
-		ns.exec("weakenLoop.js", attackingServer, 1, -2000);
+		ns.tprint("Not enough ram on the attacking server: " + attackingServer + ", target: " + target + ", executing weaken loop");
+		ns.exec("weakenLoop.js", attackingServer, 1, -1980);
 	}
 }

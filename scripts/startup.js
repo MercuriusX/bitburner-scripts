@@ -13,9 +13,9 @@ export async function main(ns) {
 
 	if (ns.getHackingLevel() > 1000) {
 		currentTargets = ["galactic-cyber", "infocomm", "solaris", "taiyang-digital", "vitalife", "lexo-corp", "helios", "alpha-ent", "rho-construction", "microdyne", "snap-fitness", "syscore", "catalyst", "aevum-police", "netlink", "millenium-fitness", "comptek", "summit-uni", "rothman-uni", "the-hub", "johnson-ortho", "omega-net", "silver-helix", "crush-fitness", "phantasy"];
-		if (ns.getHackingLevel() > 3000) { // alternate target lists to be used when hacking level is high enough
+		if (ns.getHackingLevel() > 2200) { // alternate target lists to be used when hacking level is high enough
 			currentTargets = ["nova-med", "aerocorp", "stormtech", "unitalife", "zb-def", "icarus", "defcomm", "omnia", "powerhouse-fitness", "zb-institute", "titan-labs", "applied-energetics", "galactic-cyber", "infocomm", "solaris", "taiyang-digital", "kuai-gong", "lexo-corp", "helios", "alpha-ent", "rho-construction", "microdyne", "snap-fitness", "syscore", "catalyst"]; // vitalife
-			if (ns.getHackingLevel() > 5000) {
+			if (ns.getHackingLevel() > 4000) {
 				currentTargets = ["ecorp", "megacorp", "blade", "nwo", "kuai-gong", "4sigma", "b-and-a", "omnitek", "clarkinc", "global-pharm", "fulcrumtech", "deltaone", "zeus-med", "univ-energy", "nova-med", "aerocorp", "stormtech", "unitalife", "zb-def", "icarus", "defcomm", "omnia", "powerhouse-fitness", "zb-institute", "titan-labs"];
 			}
 		}
